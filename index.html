@@ -31,6 +31,20 @@ button{border:0;border-radius:10px;background:var(--blue);color:white;padding:10
 .day-card.start-day{border:2px solid #5368c5;background:#f8f9ff}
 #startChoice button.selected{outline:3px solid #cbd5ff;background:#354b9d!important}
 .day-card.before-start{opacity:.45}
+
+.adapt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.adapt-field{display:flex;flex-direction:column;gap:5px;margin:9px 0;font-size:13px;font-weight:650}
+.adapt-field input,.adapt-field select{width:100%;min-height:42px;border:1px solid #d8deea;border-radius:9px;padding:9px;background:#fff;color:var(--ink);font:inherit;font-weight:450}
+.adapt-form{background:#f8f9fc;border:1px solid var(--line);border-radius:12px;padding:14px}
+.adapt-list{display:grid;gap:8px;margin-top:10px}
+.adapt-item{display:flex;gap:10px;align-items:flex-start;justify-content:space-between;background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px}
+.adapt-item.done{opacity:.58}.adapt-item.done .adapt-main{text-decoration:line-through}
+.adapt-main{min-width:0;flex:1}.adapt-actions{display:flex;gap:6px;flex-wrap:wrap}
+.adapt-actions button{padding:7px 9px;font-size:12px}
+button.secondary{background:#667085}
+.status-note{padding:10px 12px;background:#f2f5ff;border-radius:10px;color:#344b88;font-size:13px}
+@media(max-width:600px){.adapt-item{flex-direction:column}.adapt-actions{width:100%}}
+
 </style><link rel="manifest" href="./manifest.webmanifest">
 <meta name="theme-color" content="#354b9d">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -49,13 +63,13 @@ button{border:0;border-radius:10px;background:var(--blue);color:white;padding:10
 <div class="metric"><b>20개</b><span class="note">영어 신규 어휘 하루 목표</span></div>
 </div>
 <section id="dorm-routine"><h2>평일 기숙사 하루 일과</h2>
-<p class="note">필수 면학 3개 블록을 기존 과목 계획에 맞춰 운영합니다. 22:30 이후 연장 면학은 신청한 날에만 선택적으로 진행합니다.</p>
+<p class="note">필수 면학 시간은 학교 공식 명칭인 ET, EP1, EP2로 표시합니다. 22:30 이후 연장 면학은 신청한 날에만 선택적으로 진행합니다.</p>
 <div class="grid">
-<div class="metric"><b>16:50–18:10</b><span class="note">1교시 · 80분</span><p class="note">수학 또는 과학</p></div>
+<div class="metric"><b>16:50–18:10</b><span class="note">ET · 80분</span><p class="note">수학 또는 과학</p></div>
 <div class="metric"><b>18:10–19:20</b><span class="note">저녁 식사 및 휴식</span></div>
-<div class="metric"><b>19:20–20:50</b><span class="note">2교시 · 90분</span><p class="note">국어 또는 영어</p></div>
+<div class="metric"><b>19:20–20:50</b><span class="note">EP1 · 90분</span><p class="note">국어 또는 영어</p></div>
 <div class="metric"><b>20:50–21:10</b><span class="note">휴식</span></div>
-<div class="metric"><b>21:10–22:30</b><span class="note">3교시 · 80분</span><p class="note">영어·과학·사회 등 요일별 과목</p></div>
+<div class="metric"><b>21:10–22:30</b><span class="note">EP2 · 80분</span><p class="note">영어·과학·사회 등 요일별 과목</p></div>
 <div class="metric"><b>22:30–00:30</b><span class="note">선택 연장 면학</span><p class="note">신청한 날에만 오답·어휘·미완료 학습 보충</p></div>
 </div><p class="note">필수 면학 학습량은 하루 4시간 10분입니다. 연장 면학을 매일 해야 하는 일정으로 잡지 않습니다.</p></section>
 <section><h2>현재 학습 우선순위</h2>
@@ -80,24 +94,24 @@ button{border:0;border-radius:10px;background:var(--blue);color:white;padding:10
 </div>
 <div class="day-grid" id="dailyPlan">
   <div class="day-card"><h3>월요일 <span class="period">총 4시간 10분</span></h3>
-    <label class="day-task"><input type="checkbox" data-day="mon"><span><b>1교시 · 수학 확률과 통계 (80분)</b><br>시발점 개념 강의 → 필기 정리 → 기본 예제 복습</span></label>
-    <label class="day-task"><input type="checkbox" data-day="mon"><span><b>2교시 · 국어 (90분)</b><br>강기본 문학 또는 독서 강의 → 핵심 내용 정리 및 복습</span></label>
-    <label class="day-task"><input type="checkbox" data-day="mon"><span><b>3교시 · 영어 (80분)</b><br>신규 어휘 20개 (20분) → 영어 강의·독해 (60분)</span></label>
+    <label class="day-task"><input type="checkbox" data-day="mon"><span><b>ET · 수학 확률과 통계 (80분)</b><br>시발점 개념 강의 → 필기 정리 → 기본 예제 복습</span></label>
+    <label class="day-task"><input type="checkbox" data-day="mon"><span><b>EP1 · 국어 (90분)</b><br>강기본 문학 또는 독서 강의 → 핵심 내용 정리 및 복습</span></label>
+    <label class="day-task"><input type="checkbox" data-day="mon"><span><b>EP2 · 영어 (80분)</b><br>신규 어휘 20개 (20분) → 영어 강의·독해 (60분)</span></label>
   </div>
   <div class="day-card"><h3>화요일 <span class="period">총 4시간 10분</span></h3>
-    <label class="day-task"><input type="checkbox" data-day="tue"><span><b>1교시 · 수학 미적분Ⅰ (80분)</b><br>개념 강의 → 예제 풀이 → 틀린 문제 표시</span></label>
-    <label class="day-task"><input type="checkbox" data-day="tue"><span><b>2교시 · 영어 (90분)</b><br>신규 어휘 20개 (20분) → 영어 강의·독해 (70분)</span></label>
-    <label class="day-task"><input type="checkbox" data-day="tue"><span><b>3교시 · 통합과학 (80분)</b><br>배기범 액시스 개념 강의 → 개념 확인 문제</span></label>
+    <label class="day-task"><input type="checkbox" data-day="tue"><span><b>ET · 수학 미적분Ⅰ (80분)</b><br>개념 강의 → 예제 풀이 → 틀린 문제 표시</span></label>
+    <label class="day-task"><input type="checkbox" data-day="tue"><span><b>EP1 · 영어 (90분)</b><br>신규 어휘 20개 (20분) → 영어 강의·독해 (70분)</span></label>
+    <label class="day-task"><input type="checkbox" data-day="tue"><span><b>EP2 · 통합과학 (80분)</b><br>배기범 액시스 개념 강의 → 개념 확인 문제</span></label>
   </div>
   <div class="day-card"><h3>수요일 <span class="period">총 4시간 10분</span></h3>
-    <label class="day-task"><input type="checkbox" data-day="wed"><span><b>1교시 · 수학 확률과 통계 (80분)</b><br>월요일 개념 복습 → 유형 문제 적용</span></label>
-    <label class="day-task"><input type="checkbox" data-day="wed"><span><b>2교시 · 국어 (90분)</b><br>강기본 문학 또는 독서 강의 → 지문·문제 복습</span></label>
-    <label class="day-task"><input type="checkbox" data-day="wed"><span><b>3교시 · 영어 어휘 복습 + 통합사회 (80분)</b><br>누적 어휘 복습 (15–20분) → 통합사회 개념 학습 (남은 시간)</span></label>
+    <label class="day-task"><input type="checkbox" data-day="wed"><span><b>ET · 수학 확률과 통계 (80분)</b><br>월요일 개념 복습 → 유형 문제 적용</span></label>
+    <label class="day-task"><input type="checkbox" data-day="wed"><span><b>EP1 · 국어 (90분)</b><br>강기본 문학 또는 독서 강의 → 지문·문제 복습</span></label>
+    <label class="day-task"><input type="checkbox" data-day="wed"><span><b>EP2 · 영어 어휘 복습 + 통합사회 (80분)</b><br>누적 어휘 복습 (15–20분) → 통합사회 개념 학습 (남은 시간)</span></label>
   </div>
   <div class="day-card"><h3>목요일 <span class="period">총 4시간 10분</span></h3>
-    <label class="day-task"><input type="checkbox" data-day="thu"><span><b>1교시 · 수학 미적분Ⅰ (80분)</b><br>화요일 내용 복습 → 기본·유형 문제 적용</span></label>
-    <label class="day-task"><input type="checkbox" data-day="thu"><span><b>2교시 · 영어 (90분)</b><br>신규 어휘 20개 (20분) → 영어 강의·독해 (70분)</span></label>
-    <label class="day-task"><input type="checkbox" data-day="thu"><span><b>3교시 · 통합과학 (80분)</b><br>액시스 개념 강의 → 핵심 개념 회상 및 문제 확인</span></label>
+    <label class="day-task"><input type="checkbox" data-day="thu"><span><b>ET · 수학 미적분Ⅰ (80분)</b><br>화요일 내용 복습 → 기본·유형 문제 적용</span></label>
+    <label class="day-task"><input type="checkbox" data-day="thu"><span><b>EP1 · 영어 (90분)</b><br>신규 어휘 20개 (20분) → 영어 강의·독해 (70분)</span></label>
+    <label class="day-task"><input type="checkbox" data-day="thu"><span><b>EP2 · 통합과학 (80분)</b><br>액시스 개념 강의 → 핵심 개념 회상 및 문제 확인</span></label>
   </div>
   <div class="day-card rest"><h3>금요일 <span class="period">고정 학습 없음</span></h3>
     <p>정해진 학습량을 배정하지 않습니다. 휴식하고, 꼭 필요한 경우에만 밀린 과제를 가볍게 보충하세요.</p>
@@ -121,6 +135,27 @@ button{border:0;border-radius:10px;background:var(--blue);color:white;padding:10
   </div>
 </div>
 <div class="panel"><div class="bar"><span id="dailyProgress"></span></div><p class="note" id="dailyCount"></p><button type="button" onclick="resetDaily()">하루별 체크 초기화</button></div>
+<section id="flexiblePlanner">
+<h2>갑작스러운 일정 변경 대응</h2>
+<p class="note">ET·EP1·EP2에 수행평가나 학교 일정이 생겨 계획한 공부를 못 했을 때 기록하세요. 못 한 학습은 보충 목록으로 옮겨지고, 수행평가·과제는 마감일과 함께 따로 관리할 수 있습니다.</p>
+<div class="status-note">운영 원칙: 하루에 못 한 분량을 다음 날에 전부 몰아넣지 않습니다. 수학 등 우선순위가 높은 학습부터 보충하고, 금요일과 주말의 여유 시간을 활용해 나누어 진행하세요.</div>
+<div class="adapt-grid" style="margin-top:12px">
+<div class="adapt-form"><h3>못 한 학습 기록</h3><form id="missedForm">
+<label class="adapt-field">원래 예정된 요일<select id="missedDay" required><option>월요일</option><option>화요일</option><option>수요일</option><option>목요일</option><option>금요일</option><option>토요일</option><option>일요일</option></select></label>
+<label class="adapt-field">영향을 받은 시간<select id="missedBlock" required><option>ET</option><option>EP1</option><option>EP2</option><option>주말 학습</option><option>기타</option></select></label>
+<label class="adapt-field">못 한 학습 내용<input id="missedTask" maxlength="100" placeholder="예: 확률과 통계 개념 강의 1강" required></label>
+<label class="adapt-field">변경 사유<select id="missedReason"><option>수행평가 준비</option><option>과제·시험 준비</option><option>학교 일정·행사</option><option>갑작스러운 개인 일정</option><option>컨디션·휴식</option><option>기타</option></select></label>
+<label class="adapt-field">보충할 요일<select id="catchupDay"><option>금요일</option><option>토요일</option><option>일요일</option><option>월요일</option><option>화요일</option><option>수요일</option><option>목요일</option></select></label>
+<button type="submit">보충 목록에 추가</button></form></div>
+<div class="adapt-form"><h3>수행평가·과제 등록</h3><form id="assessmentForm">
+<label class="adapt-field">수행평가 또는 과제명<input id="assessmentTitle" maxlength="100" placeholder="예: 생명과학 탐구 보고서" required></label>
+<label class="adapt-field">마감일<input id="assessmentDue" type="date" required></label>
+<label class="adapt-field">예상 준비 시간<select id="assessmentTime"><option value="30">30분</option><option value="60" selected>1시간</option><option value="90">1시간 30분</option><option value="120">2시간</option><option value="180">3시간 이상</option></select></label>
+<label class="adapt-field">메모 (선택)<input id="assessmentMemo" maxlength="120" placeholder="예: 자료 조사 후 초안 작성"></label>
+<button type="submit">일정에 등록</button></form></div></div>
+<div class="adapt-grid" style="margin-top:16px"><div><h3>보충 대기 학습 <span class="tag" id="missedCount">0개</span></h3><p class="note">보충을 마치면 완료로 표시하세요. 이미 계획을 다시 세웠다면 항목을 삭제해도 됩니다.</p><div id="missedList" class="adapt-list"><p class="note">아직 등록된 보충 학습이 없습니다.</p></div></div>
+<div><h3>다가오는 수행평가·과제 <span class="tag" id="assessmentCount">0개</span></h3><p class="note">마감일이 빠른 순서로 표시됩니다. 준비를 마친 항목은 완료 처리하세요.</p><div id="assessmentList" class="adapt-list"><p class="note">등록된 수행평가나 과제가 없습니다.</p></div></div></div>
+</section>
 </section>
 <section><h2>영어 어휘 학습 루틴</h2>
 <div class="grid"><div class="panel"><h3>월·화·목·토</h3><b>신규 어휘 20개</b><p class="note">뜻 확인 → 예문으로 쓰임 확인 → 가리고 회상 → 모르는 단어 표시</p></div>
@@ -128,7 +163,7 @@ button{border:0;border-radius:10px;background:var(--blue);color:white;padding:10
 <div class="panel"><h3>토요일</h3><b>주간 테스트</b><p class="note">학습한 단어 중 10개 퀴즈, 틀린 단어 표시</p></div>
 <div class="panel"><h3>일요일</h3><b>오답 회수</b><p class="note">틀린 단어와 헷갈린 단어를 다시 학습하고 다음 주 신규 학습량 조정</p></div></div>
 <p><a href="vocabulary.html">어휘 학습 사이트 바로가기 →</a></p>
-<p class="note">사이트의 100개 단어는 수능 독해 기초·빈출 학술 어휘를 선별한 학습용 목록이며, 공식 수능 필수 단어 전체 목록이라고 단정하지 않습니다. 단어가 익숙해지면 독해 지문 속 의미와 결합 표현까지 확인합니다.</p></section>
+<p class="note">사이트의 220개 단어는 수능 독해 기초·빈출 학술 어휘를 선별한 학습용 목록이며, 공식 수능 필수 단어 전체 목록이라고 단정하지 않습니다. 단어가 익숙해지면 독해 지문 속 의미와 결합 표현까지 확인합니다.</p></section>
 <section><h2>과목별 강의·학습 진도</h2>
 <table><thead><tr><th>과목</th><th>현재 상태</th><th>다음 목표</th></tr></thead><tbody>
 <tr><th>국어</th><td>강기본 문학 15/33, 독서 15/31</td><td>문학·독서 각각 주 4강 안팎 + 복습</td></tr>
@@ -223,6 +258,35 @@ function resetDaily(){
 updateDaily();
 applyStart();
 </script>
+
+<script>
+const missedKey="csatPlannerMissed2028_v1", assessmentKey="csatPlannerAssessments2028_v1";
+const readStore=k=>{try{return JSON.parse(localStorage.getItem(k)||"[]")}catch(e){return []}};
+let missedItems=readStore(missedKey), assessmentItems=readStore(assessmentKey);
+const saveMissed=()=>localStorage.setItem(missedKey,JSON.stringify(missedItems));
+const saveAssessments=()=>localStorage.setItem(assessmentKey,JSON.stringify(assessmentItems));
+const safeText=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function renderMissed(){
+ const el=document.getElementById("missedList");
+ document.getElementById("missedCount").textContent=missedItems.filter(x=>!x.done).length+"개 남음";
+ if(!missedItems.length){el.innerHTML='<p class="note">아직 등록된 보충 학습이 없습니다.</p>';return;}
+ el.innerHTML=missedItems.map(x=>`<div class="adapt-item ${x.done?'done':''}"><div class="adapt-main"><b>${safeText(x.task)}</b><div class="note">${safeText(x.day)} ${safeText(x.block)} · ${safeText(x.reason)}</div><div class="note">보충 예정: ${safeText(x.catchup)}</div></div><div class="adapt-actions"><button type="button" class="secondary" data-md="${x.id}">${x.done?'완료 취소':'완료'}</button><button type="button" class="secondary" data-mx="${x.id}">삭제</button></div></div>`).join("");
+ el.querySelectorAll("[data-md]").forEach(b=>b.addEventListener("click",()=>{let x=missedItems.find(v=>v.id===Number(b.dataset.md));if(x)x.done=!x.done;saveMissed();renderMissed();}));
+ el.querySelectorAll("[data-mx]").forEach(b=>b.addEventListener("click",()=>{missedItems=missedItems.filter(v=>v.id!==Number(b.dataset.mx));saveMissed();renderMissed();}));
+}
+function renderAssessments(){
+ const el=document.getElementById("assessmentList");
+ document.getElementById("assessmentCount").textContent=assessmentItems.filter(x=>!x.done).length+"개 남음";
+ if(!assessmentItems.length){el.innerHTML='<p class="note">등록된 수행평가나 과제가 없습니다.</p>';return;}
+ el.innerHTML=[...assessmentItems].sort((a,b)=>a.due.localeCompare(b.due)).map(x=>`<div class="adapt-item ${x.done?'done':''}"><div class="adapt-main"><b>${safeText(x.title)}</b><div class="note">마감: ${safeText(x.due)} · 예상 ${safeText(x.minutes)}분</div>${x.memo?`<div class="note">${safeText(x.memo)}</div>`:''}</div><div class="adapt-actions"><button type="button" class="secondary" data-ad="${x.id}">${x.done?'완료 취소':'완료'}</button><button type="button" class="secondary" data-ax="${x.id}">삭제</button></div></div>`).join("");
+ el.querySelectorAll("[data-ad]").forEach(b=>b.addEventListener("click",()=>{let x=assessmentItems.find(v=>v.id===Number(b.dataset.ad));if(x)x.done=!x.done;saveAssessments();renderAssessments();}));
+ el.querySelectorAll("[data-ax]").forEach(b=>b.addEventListener("click",()=>{assessmentItems=assessmentItems.filter(v=>v.id!==Number(b.dataset.ax));saveAssessments();renderAssessments();}));
+}
+document.getElementById("missedForm").addEventListener("submit",e=>{e.preventDefault();missedItems.push({id:Date.now(),day:document.getElementById("missedDay").value,block:document.getElementById("missedBlock").value,task:document.getElementById("missedTask").value.trim(),reason:document.getElementById("missedReason").value,catchup:document.getElementById("catchupDay").value,done:false});saveMissed();renderMissed();e.target.reset();});
+document.getElementById("assessmentForm").addEventListener("submit",e=>{e.preventDefault();assessmentItems.push({id:Date.now(),title:document.getElementById("assessmentTitle").value.trim(),due:document.getElementById("assessmentDue").value,minutes:document.getElementById("assessmentTime").value,memo:document.getElementById("assessmentMemo").value.trim(),done:false});saveAssessments();renderAssessments();e.target.reset();});
+renderMissed();renderAssessments();
+</script>
+
 <script>
 if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
   window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(()=>{}));

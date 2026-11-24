@@ -7,7 +7,7 @@
 
 ## 고정 웹 주소 만들기 (GitHub Pages 예시)
 1. GitHub 계정으로 새 저장소(repository)를 만듭니다. 예: `csat-study`
-2. 이 ZIP의 압축을 풀고 **파일 5개(index.html, vocabulary.html, manifest.webmanifest, sw.js, icon.svg)** 를 저장소 최상위(root)에 업로드합니다.
+2. 이 ZIP의 압축을 풀고 **파일 220개(index.html, vocabulary.html, manifest.webmanifest, sw.js, icon.svg)** 를 저장소 최상위(root)에 업로드합니다.
 3. 저장소의 **Settings → Pages** 로 이동합니다.
 4. Build and deployment에서 **Deploy from a branch** 를 선택하고, Branch는 `main`, Folder는 `/ (root)` 로 설정한 뒤 Save를 누릅니다.
 5. 게시가 완료되면 `https://계정이름.github.io/csat-study/` 형태의 주소가 생깁니다.
